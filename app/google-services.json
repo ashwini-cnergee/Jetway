@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "221496674432",
+    "project_id": "jetway-broadband-app",
+    "storage_bucket": "jetway-broadband-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221496674432:android:689179faafc3402e68be65",
+        "android_client_info": {
+          "package_name": "cnergee.jetwaybroadband"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221496674432-eh6rusniqbknqrr9oormbser0bapkp7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFOo8zMNJ1tYptxYPykMWpXgDYiC5Ziok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221496674432-eh6rusniqbknqrr9oormbser0bapkp7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
