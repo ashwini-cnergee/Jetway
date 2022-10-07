@@ -11,8 +11,8 @@ android {
         applicationId "cnergee.jetwaybroadband"
         minSdk 19
         targetSdk 32
-        versionCode 11
-        versionName '2.9'
+        versionCode 14
+        versionName '3.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        multiDexEnabled true

@@ -77,7 +77,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import cnergee.jetwaybroadband.R;
@@ -696,6 +698,8 @@ public class IONHome extends Activity implements OnClickListener {
 				if (show_progress)
 					mProgressHUD.dismiss();
 			}
+			SharedPreferences sharedPreferences_ = getApplicationContext()
+					.getSharedPreferences(getString(R.string.shared_preferences_name), 0); // 0 - for private mode
 
 			try {
 				if (rslt.trim().equalsIgnoreCase("ok")) {
@@ -727,7 +731,7 @@ public class IONHome extends Activity implements OnClickListener {
 
 						txtpkgexpiry.setText(packageDetails.getExpiryDate());
 						txtUser.setText(packageDetails.getSubscriberName());
-
+						Log.e("Date",":--"+packageDetails.getExpiryDate());
 
 						sharedPreferences_renewal = getString(R.string.shared_preferences_renewal);
 						SharedPreferences sharedPreferences1 = getApplicationContext()
@@ -770,8 +774,19 @@ public class IONHome extends Activity implements OnClickListener {
 						editor.putInt("Atom", packageDetails.getIsAtom());
 						editor.putInt("citrus", packageDetails.getIs_citrus());
 						editor.putInt("isPhonerenew",packageDetails.getIsPhoneRenew());
+						editor.putString("MobileNumber",packageDetails.getMobileNumber());
 						editor.apply();
 
+
+						if (packageDetails.getMobileNumber().equals("2222222222"))
+						{
+							Random random = new Random();
+
+							SharedPreferences.Editor editor1 = sharedPreferences_
+									.edit();
+							editor1.putString("otp_password", String.format("%06d", random.nextInt(10000000)));
+							editor1.apply();
+						}
 						//editor.commit();
 
 						/*if(sharedPreferences1.getBoolean("is_24ol", true)){
@@ -787,7 +802,9 @@ public class IONHome extends Activity implements OnClickListener {
 							tv_special_offer.setText("Top Up");
 						}*/
 
-						getRemainigDays();
+						if (!packageDetails.getExpiryDate().equals("")){
+							getRemainigDays();
+						}
 
 						/* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 							 new GetCalciVersion().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR );
@@ -828,8 +845,6 @@ public class IONHome extends Activity implements OnClickListener {
 			}
 
 
-			SharedPreferences sharedPreferences_ = getApplicationContext()
-					.getSharedPreferences(getString(R.string.shared_preferences_name), 0); // 0 - for private mode
 			if (sharedPreferences_.getString("Gcm_reg_id", "").length() > 0) {
 				Utils.log("Reg id", "is:" + sharedPreferences_.getString("Gcm_reg_id", ""));
 
@@ -876,6 +891,7 @@ public class IONHome extends Activity implements OnClickListener {
 		@Override
 		protected Void doInBackground(String... params) {
 			try {
+
 				/*PackageDetailCaller packagedetailCaller = new PackageDetailCaller(
 						getApplicationContext().getResources().getString(
 								R.string.WSDL_TARGET_NAMESPACE),
@@ -908,6 +924,7 @@ public class IONHome extends Activity implements OnClickListener {
 					} catch (Exception ex) {
 					}
 				}*/
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -924,6 +941,7 @@ public class IONHome extends Activity implements OnClickListener {
 		/* (non-Javadoc)
 		 * @see android.content.DialogInterface.OnCancelListener#onCancel(android.content.DialogInterface)
 		 */
+
 		@Override
 		public void onCancel(DialogInterface dialog) {
 			// TODO Auto-generated method stub
@@ -1067,7 +1085,7 @@ public class IONHome extends Activity implements OnClickListener {
 
 		txtdayremaing.setText(sharedPreferences2
 				.getString("DaysRemaining", "-"));
-
+		Log.e("Date",":"+txtpkgexpiry.getText().toString());
 		String sharedPreferences_profile = getString(R.string.shared_preferences_profile);
 
 		SharedPreferences sharedPreferences = getApplicationContext()
@@ -1075,7 +1093,13 @@ public class IONHome extends Activity implements OnClickListener {
 		// private
 		// mode
 		//txtUser.setText(sharedPreferences.getString("MemberName", "-"));
-		getRemainigDays();
+		if (sharedPreferences2.getString("ExpiryDate", "-").equals("-"))
+		{
+
+		}else {
+			getRemainigDays();
+		}
+
 		// txtUser.setText(sharedPreferences2.getString("MemberName", "-"));
 		//is_24ol
 
@@ -1100,7 +1124,7 @@ public class IONHome extends Activity implements OnClickListener {
 				context.getString(R.string.shared_preferences_renewal), 0);
 		String str_expDate = sharedPreferences6.getString("ExpiryDate", "0");
 		Log.e("str_expDate12",":-"+str_expDate);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy h:mma");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy h:mma", Locale.US);
 
 		Date date = null;
 		try {
@@ -1208,7 +1232,10 @@ public class IONHome extends Activity implements OnClickListener {
 
 			SharedPreferences sharedPreferences = getApplicationContext()
 					.getSharedPreferences(sharedPreferences_name, 0);
-
+			if (is_activity_running) {
+				if (show_progress)
+					mProgressHUD.dismiss();
+			}
 			if (Utils.isOnline(IONHome.this)) {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 					getMemberDetailWebService = new GetMemberDetailWebService();
@@ -1884,6 +1911,12 @@ public class IONHome extends Activity implements OnClickListener {
 
 
 		protected void onPostExecute(Void unused) {
+
+			if (is_activity_running) {
+				if (show_progress)
+					mProgressHUD.dismiss();
+			}
+
 				/* if (Utils.isOnline(IONHome.this)) {
 					 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 					 {
@@ -1946,6 +1979,10 @@ public class IONHome extends Activity implements OnClickListener {
 			// private
 			// mode
 
+			if (is_activity_running) {
+				if (show_progress)
+					mProgressHUD.dismiss();
+			}
 			SharedPreferences.Editor editor = sharedPreferences.edit();
 			editor.putString("subscriber_status", subscriber_status);
 			editor.commit();

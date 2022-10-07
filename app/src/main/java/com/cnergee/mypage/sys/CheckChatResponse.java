@@ -102,7 +102,7 @@ public class CheckChatResponse  extends Service{
 									LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent1);
 									Intent intentSetRepeatAlarm = new Intent(CheckChatResponse.this,AlarmBroadcastReceiver1.class);
 									
-									PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, 0).cancel();
+									PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, PendingIntent.FLAG_IMMUTABLE).cancel();
 								}
 							}
 							
@@ -149,7 +149,7 @@ public class CheckChatResponse  extends Service{
 						Intent intent1 = new Intent("chat_end");					   
 						LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent1);
 						Intent intentSetRepeatAlarm = new Intent(CheckChatResponse.this,AlarmBroadcastReceiver1.class);				
-						PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, 0).cancel();
+						PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, PendingIntent.FLAG_IMMUTABLE).cancel();
 					}
 					
 				}
@@ -161,7 +161,7 @@ public class CheckChatResponse  extends Service{
 					Intent intent1 = new Intent("chat_end");					   
 					LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent1);
 					Intent intentSetRepeatAlarm = new Intent(CheckChatResponse.this,AlarmBroadcastReceiver1.class);				
-					PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, 0).cancel();
+					PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, PendingIntent.FLAG_IMMUTABLE).cancel();
 				}
 			}
 			else{
@@ -172,7 +172,7 @@ public class CheckChatResponse  extends Service{
 				Intent intent1 = new Intent("chat_end");					   
 				LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent1);
 				Intent intentSetRepeatAlarm = new Intent(CheckChatResponse.this,AlarmBroadcastReceiver1.class);				
-				PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, 0).cancel();
+				PendingIntent.getBroadcast(CheckChatResponse.this, 0, intentSetRepeatAlarm, PendingIntent.FLAG_IMMUTABLE).cancel();
 			}
 		}
 		

@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import cnergee.jetwaybroadband.R;
 
@@ -96,7 +97,7 @@ String reg_id="";
 		  
 		  SharedPreferences sharedPreferences1 = context.getSharedPreferences(context.getString(R.string.shared_preferences_renewal), 0);
 		  String str_expDate = sharedPreferences1.getString("ExpiryDate", "0");
-		  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy h:mma");
+		  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy h:mma", Locale.US);
 		  Date date = null;
 		  try {
 			  date = simpleDateFormat.parse(str_expDate);

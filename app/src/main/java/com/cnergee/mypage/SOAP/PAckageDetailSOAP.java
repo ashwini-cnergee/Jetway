@@ -138,6 +138,9 @@ public class PAckageDetailSOAP {
 		packagedetails.setMemberRegsiterDate(response.getPropertyAsString("MemberFromDt")
 				.toString());
 
+		packagedetails.setMobileNumber(response.getPropertyAsString("PrimaryMobileNo")
+				.toString());
+
 		packagedetails.setIpAddress(response.getPropertyAsString("IPAddress")
 				.toString());
 

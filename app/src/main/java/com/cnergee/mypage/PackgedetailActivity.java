@@ -93,7 +93,7 @@ public class PackgedetailActivity extends Activity {
 
     public String xml_file_postFix = "PackageList.xml";
     public String xml_file;
-    public String xml_file_with_path;
+    public String xml_file_with_path,mobileNo;
 
     public static Map<String, PackageList> mapPackageList;
 
@@ -128,6 +128,7 @@ public class PackgedetailActivity extends Activity {
         xml_file = xml_file_postFix;
         xml_file_with_path =  TARGET_BASE_PATH + xml_file;
         memberloginid = utils.getMemberLoginID();
+
         otp_password= sharedPreferences.getString("otp_password", "0");
 
         planList=(Spinner)findViewById(R.id.planList);
@@ -314,6 +315,7 @@ public class PackgedetailActivity extends Activity {
                             .getSharedPreferences(
                                     getString(R.string.shared_preferences_renewal),
                                     0); // 0 - for private mode
+                   mobileNo =   sharedPreferences2.getString("MobileNumber", "0");
                     SharedPreferences.Editor edit2 = sharedPreferences2.edit();
                     edit2.clear();
 
@@ -374,13 +376,23 @@ public class PackgedetailActivity extends Activity {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            PackgedetailActivity.this.finish();
-                            Intent intent = new Intent(
-                                    PackgedetailActivity.this,
-                                    LoginFragmentActivity.class);
-                            intent.putExtra("from", "2");
-                            startActivity(intent);
-                            dialog.dismiss();
+                            if(mobileNo.equals("2222222222"))
+                            {
+                                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+                                    new SettingResultAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR );
+                                }
+                                else{
+                                    new SettingResultAsyncTask().execute();
+                                }
+                            }else {
+                                PackgedetailActivity.this.finish();
+                                Intent intent = new Intent(
+                                        PackgedetailActivity.this,
+                                        LoginFragmentActivity.class);
+                                intent.putExtra("from", "2");
+                                startActivity(intent);
+                                dialog.dismiss();
+                            }
                         }
                     });
 
@@ -951,6 +963,7 @@ public class PackgedetailActivity extends Activity {
                                     int position, long id) {
 
                 Intent intent =new Intent(PackgedetailActivity.this,ChangePackage_NewActivity.class);
+                intent.putExtra("MobileNumber",mobileNo);
                 intent.putExtra("Selected_Pkg", (Serializable) final_pkg_list1.get(position));
                 startActivity(intent);
             }

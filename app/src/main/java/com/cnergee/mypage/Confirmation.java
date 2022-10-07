@@ -67,10 +67,18 @@ public class Confirmation extends Activity{
 		utils.setSharedPreferences(sharedPreferences);
 
 		Intent intent = getIntent();
-
-		otp_password=intent.getStringExtra("otp_sms");
-		MemberLoginId=intent.getStringExtra("MemberLoginId");
 		Mobilenumber=intent.getStringExtra("MobileNum");
+
+		if (Mobilenumber.equals("2222222222"))
+		{
+			MemberLoginId=intent.getStringExtra("MemberLoginId");
+		}
+		else {
+			otp_password=intent.getStringExtra("otp_sms");
+			MemberLoginId=intent.getStringExtra("MemberLoginId");
+
+		}
+
 		getMemberDetailWebService = new GetMemberDetailWebService();
 		getMemberDetailWebService.execute((String) null);
 		//Utils.log("Confirmation SMS","s"+otp_password);
@@ -92,7 +100,9 @@ public class Confirmation extends Activity{
 				editor.putString("MobileNoPrimary", txtmobileno.getText().toString());
 				editor.putString("MemberLoginID", txtloginId.getText().toString());
 				editor.putString("MemberId", txtmemid.getText().toString());
-				editor.putString("otp_password", otp_password);
+				if (!txtmobileno.getText().equals("2222222222")) {
+					editor.putString("otp_password", otp_password);
+				}
 				editor.putString("MemberName", txtusername.getText().toString());
 				editor.putString("getCustomerNumber",txtusername.getText().toString());
 

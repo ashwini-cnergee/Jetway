@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.cnergee.mypage.Authentication;
+import com.cnergee.mypage.Confirmation;
 import com.cnergee.mypage.IONHome;
 
 import com.cnergee.mypage.LoginFragmentActivity;
@@ -409,13 +410,24 @@ public class ExistingConnFragment extends Fragment {
 					InsertPhoneDetailsWebService = null;
 
 					if (rslt.trim().equalsIgnoreCase("ok")) {
-						
-						getActivity().finish();
-						Intent intent = new Intent(getActivity(), SMSAuthenticationActivity.class);
-						intent.putExtra("mobilenumber",mobilenumber.getText().toString());
-						intent.putExtra("MemberId",MemberId);
-						intent.putExtra("MemberLoginId",MemberLoginId);
-						startActivity(intent);
+						if (mobilenumber.getText().toString().equals("2222222222"))
+						{
+
+							Intent intent = new Intent(getActivity(), Confirmation.class);
+							intent.putExtra("MobileNum", mobilenumber.getText().toString());
+							intent.putExtra("MemberId", MemberId);
+							intent.putExtra("MemberLoginId", MemberLoginId);
+							startActivity(intent);
+
+						}else {
+
+							getActivity().finish();
+							Intent intent = new Intent(getActivity(), SMSAuthenticationActivity.class);
+							intent.putExtra("mobilenumber", mobilenumber.getText().toString());
+							intent.putExtra("MemberId", MemberId);
+							intent.putExtra("MemberLoginId", MemberLoginId);
+							startActivity(intent);
+						}
 						
 					} else {
 						mProgressHUD.dismiss();

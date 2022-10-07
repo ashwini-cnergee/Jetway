@@ -242,7 +242,7 @@ public class ChatActivity extends Activity implements IViewImage,IRefreshAdapter
 
 		Intent intentSetRepeatAlarm12 = new Intent(ChatActivity.this,AlarmBroadcastReceiver1.class);
 		
-		penIntentRepeatAlarm= PendingIntent.getBroadcast(ChatActivity.this, 0, intentSetRepeatAlarm12, 0);
+		penIntentRepeatAlarm= PendingIntent.getBroadcast(ChatActivity.this, 0, intentSetRepeatAlarm12, PendingIntent.FLAG_IMMUTABLE);
 		Calendar cal = Calendar.getInstance();
 		AlarmManager Repeatalarm = (AlarmManager)ChatActivity.this.getSystemService(Context.ALARM_SERVICE);
 		// Start every 30 seconds
@@ -1200,7 +1200,7 @@ public class ChatActivity extends Activity implements IViewImage,IRefreshAdapter
 					
 					Intent intentSetRepeatAlarm12 = new Intent(ChatActivity.this,AlarmBroadcastReceiver1.class);
 					
-					penIntentRepeatAlarm= PendingIntent.getBroadcast(ChatActivity.this, 0, intentSetRepeatAlarm12, 0);
+					penIntentRepeatAlarm= PendingIntent.getBroadcast(ChatActivity.this, 0, intentSetRepeatAlarm12, PendingIntent.FLAG_IMMUTABLE);
 					Calendar cal = Calendar.getInstance();
 					AlarmManager Repeatalarm = (AlarmManager)ChatActivity.this.getSystemService(Context.ALARM_SERVICE);
 					// Start every 30 seconds

@@ -19,6 +19,8 @@ public class PackageDetails {
 	private String MemberName;
 	private String SubscriberName;;
 	private String ConnectionTypeId;
+	private String MobileNumber;
+
 	private boolean is_24ol;
 	private int isCC_Avenue=0;
 	private int is_citrus=0;
@@ -200,5 +202,13 @@ public class PackageDetails {
 
 	public void setIsPhoneRenew(int isPhoneRenew) {
 		this.isPhoneRenew = isPhoneRenew;
+	}
+
+	public String getMobileNumber() {
+		return MobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		MobileNumber = mobileNumber;
 	}
 }
